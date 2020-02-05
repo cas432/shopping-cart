@@ -25,13 +25,12 @@ products = [
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
-print(products)
-# pprint(products)
-
 # TODO: write some Python code here to produce the desired output
 
 #INFO CAPTURE/ INPUT
 
 selected_id = input("Please input a product identifier: ")
-
+matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
+matching_product = matching_products[0]
+print("SELECTED PRODUCT: " + matching_product["name"] + " " + str(matching_product["price"]))
 #INFO DISLPAY/ OUTPUT
