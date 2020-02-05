@@ -29,3 +29,9 @@ print(products)
 # pprint(products)
 
 # TODO: write some Python code here to produce the desired output
+
+#INFO CAPTURE/ INPUT
+
+selected_id = input("Please input a product identifier: ")
+
+#INFO DISLPAY/ OUTPUT
