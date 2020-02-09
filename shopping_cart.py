@@ -59,7 +59,7 @@ while True:
 print(divider)
 print("GREEN FOODS GROCERY")
 print("WWW.GREEN-FOODS-GROCERY.COM")
-print("123-456-7890")
+print("(123)-555-1234")
 print(divider)
 print("CHECKOUT AT: ") 
 print(divider)
@@ -78,12 +78,12 @@ print(divider)
 
 #calculate total
 total_usd = "${0:.2f}".format(total_price)
-print("TOTAL PRICE: " + total_usd)
+print("SUBTOTAL: " + total_usd)
 
 #calculate tax
 New_York_tax = 0.0875
 tax_amnt = total_price * New_York_tax
-
-
+tax_usd = "${0:.2f}".format(tax_amnt)
+print("TAX: " + tax_usd)
 
 #TODO: date and time, total tax, csv/google sheets
