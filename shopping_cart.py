@@ -1,7 +1,9 @@
 # shopping_cart.py
 import datetime
 #from pprint import pprint
+from dotenv import load_dotenv
 
+import os
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
     {"id":2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99},
@@ -97,8 +99,10 @@ total_usd = "${0:.2f}".format(total_price)
 print("SUBTOTAL: " + total_usd)
 
 #calculate tax
-New_York_tax = 0.0875
-tax_amnt = total_price * New_York_tax
+load_dotenv()
+env_tax = os.environ.get("TAX_RATE")
+float_tax = float(env_tax)
+tax_amnt = total_price * float_tax
 tax_usd = "${0:.2f}".format(tax_amnt)
 print("TAX: " + tax_usd)
 
