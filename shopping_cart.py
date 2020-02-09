@@ -50,12 +50,8 @@ while True:
         break
 
     else:
-        print("ID Number not found. Please enter a valid ID or type 'DONE' to finish.")
+        print("\n    ID Number not found. Please enter a valid ID or type 'DONE' to finish.\n")
         
-    #else: 
-        #print("Please enter a valid ID")
-       # False
-
 
 # INFO DISLPAY/ OUTPUT
 
@@ -63,6 +59,7 @@ while True:
 print(divider)
 print("GREEN FOODS GROCERY")
 print("WWW.GREEN-FOODS-GROCERY.COM")
+print("123-456-7890")
 print(divider)
 print("CHECKOUT AT: ") 
 print(divider)
@@ -72,8 +69,21 @@ for selected_id in selected_ids:
     matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
     matching_product = matching_products[0]
     total_price = total_price + matching_product["price"]
-    print("... " + matching_product["name"] + " " + str(matching_product["price"]))
 
-print("TOTAL PRICE: " + str(total_price))
+    price_usd = "(${0:.2f})".format(matching_product["price"])
+   
+    print("... " + matching_product["name"] + " " + price_usd)
 
-#TODO: date and time, input check value, total tax
+print(divider)
+
+#calculate total
+total_usd = "${0:.2f}".format(total_price)
+print("TOTAL PRICE: " + total_usd)
+
+#calculate tax
+New_York_tax = 0.0875
+tax_amnt = total_price * New_York_tax
+
+
+
+#TODO: date and time, total tax, csv/google sheets
