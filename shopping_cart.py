@@ -67,8 +67,9 @@ hour = (time.strftime("%I:%M %p"))
 
 print(divider)
 print("GREEN FOODS GROCERY")
-print("WWW.GREEN-FOODS-GROCERY.COM")
 print("(123)-555-1234")
+print("WWW.GREEN-FOODS-GROCERY.COM")
+
 print(divider)
 print("CHECKOUT AT: " + today + " " + hour) 
 
@@ -108,5 +109,6 @@ print("TOTAL: " + tax_plus_total_usd)
 
 print(divider)
 print("THANK YOU! SEE YOU AGAIN SOON!")
+print(divider)
 
 #TODO: date and time, total tax, csv/google sheets
