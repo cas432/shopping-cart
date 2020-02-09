@@ -25,13 +25,15 @@ products = [
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
-# TODO: write some Python code here to produce the desired output
+
 
 #INFO CAPTURE/ INPUT
 total_price = 0
 selected_ids = []
 all_ids = []
 divider = "-------------------------"
+
+print("\nWELCOME!")
 
 #Make list of all valid IDs
 for p in products:
@@ -55,13 +57,26 @@ while True:
 
 # INFO DISLPAY/ OUTPUT
 
+#pull date info
+from datetime import date
+today = datetime.date.today().strftime("%Y-%m-%d")
+
+#pull time info
+import time
+hour = (time.strftime("%I:%M %p"))
 
 print(divider)
 print("GREEN FOODS GROCERY")
 print("WWW.GREEN-FOODS-GROCERY.COM")
 print("(123)-555-1234")
 print(divider)
-print("CHECKOUT AT: ") 
+print("CHECKOUT AT: " + today + " " + hour) 
+
+
+print(today)
+
+
+
 print(divider)
 
 print("SELECTED PRODUCT: ")
@@ -76,7 +91,7 @@ for selected_id in selected_ids:
 
 print(divider)
 
-#calculate total
+#calculate subtotal
 total_usd = "${0:.2f}".format(total_price)
 print("SUBTOTAL: " + total_usd)
 
@@ -85,5 +100,13 @@ New_York_tax = 0.0875
 tax_amnt = total_price * New_York_tax
 tax_usd = "${0:.2f}".format(tax_amnt)
 print("TAX: " + tax_usd)
+
+#calculate total
+tax_plus_total = tax_amnt + total_price
+tax_plus_total_usd = "${0:.2f}".format(tax_plus_total)
+print("TOTAL: " + tax_plus_total_usd)
+
+print(divider)
+print("THANK YOU! SEE YOU AGAIN SOON!")
 
 #TODO: date and time, total tax, csv/google sheets
