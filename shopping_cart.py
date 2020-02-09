@@ -1,5 +1,5 @@
 # shopping_cart.py
-
+import datetime
 #from pprint import pprint
 
 products = [
@@ -30,21 +30,50 @@ products = [
 #INFO CAPTURE/ INPUT
 total_price = 0
 selected_ids = []
+all_ids = []
+divider = "-------------------------"
+
+#Make list of all valid IDs
+for p in products:
+    Id_num =str(p["id"])
+    all_ids.append(Id_num)
+    
+
 
 while True: 
     selected_id = input("Please input a product identifier: ")
    
-    if selected_id == "DONE":
-        break
-    else:
+    if selected_id in all_ids:
         selected_ids.append(selected_id)
+
+    elif selected_id == "DONE":
+        break
+
+    else:
+        print("ID Number not found. Please enter a valid ID or type 'DONE' to finish.")
+        
+    #else: 
+        #print("Please enter a valid ID")
+       # False
+
 
 # INFO DISLPAY/ OUTPUT
 
+
+print(divider)
+print("GREEN FOODS GROCERY")
+print("WWW.GREEN-FOODS-GROCERY.COM")
+print(divider)
+print("CHECKOUT AT: ") 
+print(divider)
+
+print("SELECTED PRODUCT: ")
 for selected_id in selected_ids:
     matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
     matching_product = matching_products[0]
     total_price = total_price + matching_product["price"]
-    print("SELECTED PRODUCT: " + matching_product["name"] + " " + str(matching_product["price"]))
+    print("... " + matching_product["name"] + " " + str(matching_product["price"]))
 
 print("TOTAL PRICE: " + str(total_price))
+
+#TODO: date and time, input check value, total tax
