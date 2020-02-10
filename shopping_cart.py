@@ -67,52 +67,74 @@ today = datetime.date.today().strftime("%Y-%m-%d")
 import time
 hour = (time.strftime("%I:%M %p"))
 
-print(divider)
-print("GREEN FOODS GROCERY")
-print("(123)-555-1234")
-print("WWW.GREEN-FOODS-GROCERY.COM")
-
-print(divider)
-print("CHECKOUT AT: " + today + " " + hour) 
+today_file_name = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f")
+file_path = today_file_name + ".txt"
 
 
-print(today)
+with open(file_path, "w") as file:
+
+    print(divider)
+    print("GREEN FOODS GROCERY")
+    print("(123)-555-1234")
+    print("WWW.GREEN-FOODS-GROCERY.COM")
+
+    print(divider)
+    print("CHECKOUT AT: " + today + " " + hour) 
+    print(divider)
+
+    file.write(divider)
+    file.write("\nGREEN FOODS GROCERY\n")
+    file.write("(123)-555-1234\n")
+    file.write("WWW.GREEN-FOODS-GROCERY.COM\n")
+
+    file.write(divider)
+    file.write("\nCHECKOUT AT: " + today + " " + hour + "\n") 
+    file.write(divider)
 
 
+    print("SELECTED PRODUCT: ")
+    file.write("\nSELECTED PRODUCT:")
+    for selected_id in selected_ids:
+        matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
+        matching_product = matching_products[0]
+        total_price = total_price + matching_product["price"]
 
-print(divider)
+        price_usd = "(${0:.2f})".format(matching_product["price"])
+    
+        print("... " + matching_product["name"] + " " + price_usd)
+        file.write("\n... " + matching_product["name"] + " " + price_usd)
+    
+    file.write("\n")
+    file.write(divider)
 
-print("SELECTED PRODUCT: ")
-for selected_id in selected_ids:
-    matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
-    matching_product = matching_products[0]
-    total_price = total_price + matching_product["price"]
+    #calculate subtotal
+    total_usd = "${0:.2f}".format(total_price)
+    print("SUBTOTAL: " + total_usd)
+    file.write("\nSUBTOTAL: " + total_usd)
 
-    price_usd = "(${0:.2f})".format(matching_product["price"])
-   
-    print("... " + matching_product["name"] + " " + price_usd)
+    #calculate tax
+    load_dotenv()
+    env_tax = os.environ.get("TAX_RATE")
+    float_env_tax = float(env_tax)
+    tax_amnt = total_price * float_env_tax
+    tax_usd = "${0:.2f}".format(tax_amnt)
+    print("TAX: " + tax_usd)
+    file.write("\nTAX: " + tax_usd)
 
-print(divider)
 
-#calculate subtotal
-total_usd = "${0:.2f}".format(total_price)
-print("SUBTOTAL: " + total_usd)
+    #calculate total
+    tax_plus_total = tax_amnt + total_price
+    tax_plus_total_usd = "${0:.2f}".format(tax_plus_total)
+    print("TOTAL: " + tax_plus_total_usd)
+    file.write("\nTOTAL: " + tax_plus_total_usd)
 
-#calculate tax
-load_dotenv()
-env_tax = os.environ.get("TAX_RATE")
-float_tax = float(env_tax)
-tax_amnt = total_price * float_tax
-tax_usd = "${0:.2f}".format(tax_amnt)
-print("TAX: " + tax_usd)
-
-#calculate total
-tax_plus_total = tax_amnt + total_price
-tax_plus_total_usd = "${0:.2f}".format(tax_plus_total)
-print("TOTAL: " + tax_plus_total_usd)
-
-print(divider)
-print("THANK YOU! SEE YOU AGAIN SOON!")
-print(divider)
+    print(divider)
+    print("THANK YOU! SEE YOU AGAIN SOON!")
+    print(divider)
+    
+    file.write("\n")
+    file.write(divider)
+    file.write("\nTHANK YOU! SEE YOU AGAIN SOON!\n")
+    file.write(divider)
 
 #TODO: date and time, total tax, csv/google sheets

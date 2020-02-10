@@ -1,0 +1,19 @@
+-------------------------
+GREEN FOODS GROCERY
+(123)-555-1234
+WWW.GREEN-FOODS-GROCERY.COM
+-------------------------
+CHECKOUT AT: 2020-02-09 07:02 PM
+-------------------------
+SELECTED PRODUCT:
+... Chocolate Sandwich Cookies ($3.50)
+... All-Seasons Salt ($4.99)
+... Robust Golden Unsweetened Oolong Tea ($2.49)
+... Smart Ones Classic Favorites Mini Rigatoni With Vodka Cream Sauce ($6.99)
+-------------------------
+SUBTOTAL: $17.97
+TAX: $17970.00
+TOTAL: $17987.97
+-------------------------
+THANK YOU! SEE YOU AGAIN SOON!
+-------------------------
