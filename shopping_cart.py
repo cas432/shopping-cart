@@ -1,9 +1,8 @@
 # shopping_cart.py
 import datetime
-#from pprint import pprint
 from dotenv import load_dotenv
-
 import os
+
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
     {"id":2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99},
@@ -28,22 +27,23 @@ products = [
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
 
+#PART I: CAPTURE USER INPUT
 
-#INFO CAPTURE/ INPUT
+#Setup Variables
 total_price = 0
 selected_ids = []
 all_ids = []
 divider = "-------------------------"
 
+
 print("\nWELCOME!")
 
-#Make list of all valid IDs
+#Create list of all valid IDs
 for p in products:
     Id_num =str(p["id"])
     all_ids.append(Id_num)
-    
 
-
+#Enter and Validate Inputs   
 while True: 
     selected_id = input("Please input a product identifier: ")
    
@@ -57,20 +57,22 @@ while True:
         print("\n    ID Number not found. Please enter a valid ID or type 'DONE' to finish.\n")
         
 
-# INFO DISLPAY/ OUTPUT
+# PART II: DISPLAY OUTPUT
 
-#pull date info
+#Pull Date Info
 from datetime import date
 today = datetime.date.today().strftime("%Y-%m-%d")
 
-#pull time info
+#Pull Time Info
 import time
 hour = (time.strftime("%I:%M %p"))
 
+#Create Receipt File
 today_file_name = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f")
 file_path = today_file_name + ".txt"
 
 
+#Print out Receipt/Write File
 with open(file_path, "w") as file:
 
     print(divider)
@@ -91,7 +93,7 @@ with open(file_path, "w") as file:
     file.write("\nCHECKOUT AT: " + today + " " + hour + "\n") 
     file.write(divider)
 
-
+    #Print Individual Items and Prices
     print("SELECTED PRODUCT: ")
     file.write("\nSELECTED PRODUCT:")
     for selected_id in selected_ids:
@@ -107,12 +109,12 @@ with open(file_path, "w") as file:
     file.write("\n")
     file.write(divider)
 
-    #calculate subtotal
+    #Calculate subtotal
     total_usd = "${0:.2f}".format(total_price)
     print("SUBTOTAL: " + total_usd)
     file.write("\nSUBTOTAL: " + total_usd)
 
-    #calculate tax
+    #Calculate tax
     load_dotenv()
     env_tax = os.environ.get("TAX_RATE")
     float_env_tax = float(env_tax)
@@ -122,11 +124,19 @@ with open(file_path, "w") as file:
     file.write("\nTAX: " + tax_usd)
 
 
-    #calculate total
+    #Calculate total
     tax_plus_total = tax_amnt + total_price
     tax_plus_total_usd = "${0:.2f}".format(tax_plus_total)
     print("TOTAL: " + tax_plus_total_usd)
     file.write("\nTOTAL: " + tax_plus_total_usd)
+
+    
+    print(divider)
+    email_YN = input("Would you like to have your receipt emailed to you? (Y/N): ")
+        if email_YN == "Y":
+            user_email = input("Please enter your email address: ")
+                   
+
 
     print(divider)
     print("THANK YOU! SEE YOU AGAIN SOON!")
@@ -136,5 +146,3 @@ with open(file_path, "w") as file:
     file.write(divider)
     file.write("\nTHANK YOU! SEE YOU AGAIN SOON!\n")
     file.write(divider)
-
-#TODO: date and time, total tax, csv/google sheets
