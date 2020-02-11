@@ -39,8 +39,9 @@ total_price = 0
 x = 0 #lbs index number 
 divider = "-------------------------"
 
-
-print("\nWELCOME!")
+print(divider)
+print("WELCOME!")
+print(divider)
 
 #Create list of all valid IDs
 for p in products:
