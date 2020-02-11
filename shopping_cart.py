@@ -1,8 +1,7 @@
-# shopping_cart.py
 import datetime
 from dotenv import load_dotenv
 import os
-
+ 
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50, "price_per": "N"},
     {"id":2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99, "price_per": "N"},
@@ -29,7 +28,6 @@ products = [
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
 
-#BANANAS price per attribute : bool T/F Check for t/f then ask for #
 #PART I: CAPTURE USER INPUT
 
 #Initialize Variables/Lists
@@ -51,16 +49,16 @@ for p in products:
 
 #Enter and Validate Inputs   
 while True: 
-    selected_id = input("Please input a product identifier: ")
+    selected_id = input("Please input a product ID: ")
                 
    
     if selected_id in all_ids:
         selected_ids.append(selected_id)
         int_selected_id = int(selected_id) 
-        int_selected_id_minus_1 = int_selected_id - 1
+        int_selected_id_minus_1 = int_selected_id - 1 # -1 because index starts at 0
                 
         if products[int_selected_id_minus_1].get("price_per") == "Y":
-            pounds = input("    Please input how many pounds you would like: ")
+            pounds = input("    How many pounds would you would like to purchase?: ")
             float_pounds = float(pounds)
             lbs.append(float_pounds)
         
@@ -69,7 +67,7 @@ while True:
         break
 
     else:
-        print("\n    ID Number not found. Please enter a valid ID or type 'DONE' to finish.\n")
+        print("\n    ID not found. Please enter a valid ID or type 'DONE' to finish shopping.\n")
         
 
 # PART II: DISPLAY OUTPUT
@@ -84,7 +82,8 @@ hour = (time.strftime("%I:%M %p"))
 
 #Create Receipt File
 today_file_name = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f")
-file_path = "receipts/" + today_file_name + ".txt"
+#file_path = "receipts/" + today_file_name + ".txt"
+file_path = os.path.join(os.path.dirname(__file__), "receipts", today_file_name + ".txt")
 
 
 
@@ -151,6 +150,7 @@ with open(file_path, "w") as file:
 
     #Calculate subtotal
     total_usd = "${0:.2f}".format(total_price)
+    print(divider)
     print("SUBTOTAL: " + total_usd)
     file.write("\nSUBTOTAL: " + total_usd)
 

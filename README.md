@@ -20,7 +20,7 @@ conda create -n shopping-env python=3.7 #(first time only)
 conda activate shopping-env
 ```
 ### Package Installation
-Please install the following packages
+Please install the following packages:
 
 ```sh
 pip install python-dotenv
