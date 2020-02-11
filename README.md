@@ -7,7 +7,7 @@
 Fork this [repository](https://github.com/cas432/shopping-cart) from Github and then clone your fork to download it locally onto your computer. Then navigate there from the command line:
 
 ```sh
-cd ~/Desktop/shopping-cart
+cd shopping-cart
 ```
 
 ## Setup
@@ -27,7 +27,7 @@ pip install python-dotenv
 ```
 
 ## Usage
-Run the program:
+Run the python script from the command line:
 
 ```py
 python shopping_cart.py

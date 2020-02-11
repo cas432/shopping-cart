@@ -32,12 +32,13 @@ products = [
 #BANANAS price per attribute : bool T/F Check for t/f then ask for #
 #PART I: CAPTURE USER INPUT
 
-#Setup Variables
-total_price = 0
-x = 0
+#Initialize Variables/Lists
+
 selected_ids = []
 all_ids = []
 lbs = []
+total_price = 0
+x = 0 #lbs index number 
 divider = "-------------------------"
 
 
@@ -120,6 +121,7 @@ with open(file_path, "w") as file:
          
         matching_product = matching_products[0]
 
+        #Price per item IDs
         if matching_product["price_per"] == "N":
             total_price = total_price + matching_product["price"]
         
@@ -129,7 +131,8 @@ with open(file_path, "w") as file:
             print("... " + matching_product["name"] + " " + price_usd)
             file.write("\n... " + matching_product["name"] + " " + price_usd)
 
-         
+
+        #Price by pound IDs 
         elif matching_product["price_per"] == "Y":
            
             new_pound_price = matching_product["price"] * lbs[x]
@@ -166,9 +169,7 @@ with open(file_path, "w") as file:
     tax_plus_total_usd = "${0:.2f}".format(tax_plus_total)
     print("TOTAL: " + tax_plus_total_usd)
     file.write("\nTOTAL: " + tax_plus_total_usd)
-
-    
-
+  
 
     print(divider)
     print("THANK YOU! SEE YOU AGAIN SOON!")
@@ -179,4 +180,3 @@ with open(file_path, "w") as file:
     file.write("\nTHANK YOU! SEE YOU AGAIN SOON!\n")
     file.write(divider)
 
-#os.rename(today_file_name + ".txt", "receipts/" + today_file_name + ".txt")
