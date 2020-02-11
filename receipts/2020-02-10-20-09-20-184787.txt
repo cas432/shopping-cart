@@ -1,0 +1,18 @@
+-------------------------
+GREEN FOODS GROCERY
+(123)-555-1234
+WWW.GREEN-FOODS-GROCERY.COM
+-------------------------
+CHECKOUT AT: 2020-02-10 08:09 PM
+-------------------------
+SELECTED PRODUCT:
+... Chocolate Sandwich Cookies ($3.50)
+... All-Seasons Salt ($4.99)
+... Robust Golden Unsweetened Oolong Tea ($2.49)
+-------------------------
+SUBTOTAL: $10.98
+TAX: $0.96
+TOTAL: $11.94
+-------------------------
+THANK YOU! SEE YOU AGAIN SOON!
+-------------------------
