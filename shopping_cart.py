@@ -50,7 +50,7 @@ for p in products:
 
 #Enter and Validate Inputs   
 while True: 
-    selected_id = input("Please input a product ID: ")
+    selected_id = input("Please input a product ID (Typye 'DONE' when finished): ")
                 
    
     if selected_id in all_ids:
