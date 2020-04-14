@@ -1,7 +1,9 @@
-import datetime
+
 import pytest
 from dotenv import load_dotenv
 import os
+from datetime import datetime
+
  
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50, "price_per": "N"},
@@ -34,21 +36,20 @@ def to_usd(my_price):
     '''Convert numeric value into currency formatting'''
     return f"${my_price:,.2f}"
 
-def human_friendly_timestamp():
-    '''Convert timestamp info into readable form'''
+def filename_timestamp():
+    '''Convert timestamp into format for file name'''
+    return datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f")
 
-     #Pull Date Info
-    from datetime import date
-    today = datetime.date.today().strftime("%Y-%m-%d")
+def readable_timestamp():
+    '''Convert timestamp info into readable form for user receipt'''
+    return datetime.now().strftime("%Y-%m-%d %I:%M %p")
 
-    #Pull Time Info
-    import time
-    hour = (time.strftime("%I:%M %p"))
+def find_product(my_id):
+    '''Find the proper product'''
+    selected_ids.append(my_id)
+    int_selected_id = int(my_id) 
+    return int_selected_id
 
-    #Create Receipt File
-    return datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f")
- 
-    
 
 if __name__ == "__main__":
     #PART I: CAPTURE USER INPUT
@@ -77,8 +78,7 @@ if __name__ == "__main__":
                     
     
         if selected_id in all_ids:
-            selected_ids.append(selected_id)
-            int_selected_id = int(selected_id) 
+            int_selected_id = find_product(selected_id)
             int_selected_id_minus_1 = int_selected_id - 1 # -1 because index starts at 0
                     
             if products[int_selected_id_minus_1].get("price_per") == "Y":
@@ -96,10 +96,12 @@ if __name__ == "__main__":
 
     # PART II: DISPLAY OUTPUT
 
+   
+
     #file_path = os.path.join(os.path.dirname(__file__), "receipts", today_file_name + ".txt")
-    file_path = "receipts/" + human_friendly_timestamp() + ".txt"
+    file_path = "receipts/" + filename_timestamp() + ".txt"
 
-
+    
 
 
     #Print out Receipt/Write File
@@ -110,8 +112,9 @@ if __name__ == "__main__":
         print("(123)-555-1234")
         print("WWW.GREEN-FOODS-GROCERY.COM")
 
+
         print(divider)
-        print("CHECKOUT AT: " + today + " " + hour) 
+        print("CHECKOUT AT: " + readable_timestamp())
         print(divider)
 
         file.write(divider)
@@ -120,7 +123,7 @@ if __name__ == "__main__":
         file.write("WWW.GREEN-FOODS-GROCERY.COM\n")
 
         file.write(divider)
-        file.write("\nCHECKOUT AT: " + today + " " + hour + "\n") 
+        file.write("\nCHECKOUT AT: " + readable_timestamp() + "\n") 
         file.write(divider)
 
         #Print Individual Items and Prices
