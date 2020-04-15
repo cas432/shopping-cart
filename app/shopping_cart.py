@@ -65,9 +65,9 @@ def calc_tax(total):
     return tax_amnt
 
 def calc_total(tax, total):
-        '''Calculate order total'''
-        tax_plus_total = tax + total
-        return tax_plus_total
+    '''Calculate order total'''
+    tax_plus_total = tax + total
+    return tax_plus_total
        
 
 
@@ -95,7 +95,7 @@ if __name__ == "__main__":
     while True: 
         selected_id = input("Please input a product ID (Typye 'DONE' when finished): ")
                     
-            if selected_id in all_ids:
+        if selected_id in all_ids:
             selected_ids.append(selected_id)
             int_selected_id = int(selected_id) 
             int_selected_id_minus_1 = int_selected_id - 1 # -1 because index starts at 0
@@ -107,6 +107,7 @@ if __name__ == "__main__":
                             
         elif selected_id == "DONE":
             break
+
         else:
             print("\n    ID not found. Please enter a valid ID or type 'DONE' to finish shopping.\n")
             
@@ -139,10 +140,10 @@ if __name__ == "__main__":
 
             #Price per item IDs
             if matching_product["price_per"] == "N":
-                   total_price = total_price + matching_product["price"]
+                    total_price = total_price + matching_product["price"]
                        
-                price_usd = "(" + to_usd(matching_product["price"]) + ")" 
-                receipt += "\n... " + matching_product["name"] + " " + price_usd
+                    price_usd = "(" + to_usd(matching_product["price"]) + ")" 
+                    receipt += "\n... " + matching_product["name"] + " " + price_usd
 
             #Price by pound IDs 
             elif matching_product["price_per"] == "Y":            
