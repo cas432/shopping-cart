@@ -195,13 +195,15 @@ if __name__ == "__main__":
         receipt += "\nTOTAL: " + tax_plus_total_usd
     
 
-        goodbye =  print_message("THANK YOU! SEE YOU AGAIN SOON!")
-        receipt += goodbye
+        print_message("THANK YOU! SEE YOU AGAIN SOON!")
+ 
         
         receipt += "\n"
         receipt +=divider
-        receipt += "THANK YOU! SEE YOU AGAIN SOON!"
+        receipt += "\nTHANK YOU! SEE YOU AGAIN SOON!\n"
         receipt +=divider
+
+        print(receipt)
 
         file.write(receipt)
 
