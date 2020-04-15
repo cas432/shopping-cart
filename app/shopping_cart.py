@@ -44,11 +44,20 @@ def readable_timestamp():
     '''Convert timestamp info into readable form for user receipt'''
     return datetime.now().strftime("%Y-%m-%d %I:%M %p")
 
-def find_product(my_id):
+def find_product():
     '''Find the proper product'''
-    selected_ids.append(my_id)
-    int_selected_id = int(my_id) 
-    return int_selected_id
+    selected_ids.append(selected_id)
+    int_selected_id = int(selected_id) 
+    return int
+
+def find_id_name(my_id):
+    return my_id["name"]
+
+def print_message(message):
+    print(divider)
+    print(message)
+    print(divider)
+    
 
 
 if __name__ == "__main__":
@@ -62,10 +71,9 @@ if __name__ == "__main__":
     total_price = 0
     x = 0 #lbs index number 
     divider = "-------------------------"
+    receipt = ""
 
-    print(divider)
-    print("WELCOME!")
-    print(divider)
+    print_message("WELCOME!")
 
     #Create list of all valid IDs
     for p in products:
@@ -78,7 +86,8 @@ if __name__ == "__main__":
                     
     
         if selected_id in all_ids:
-            int_selected_id = find_product(selected_id)
+            selected_ids.append(selected_id)
+            int_selected_id = int(selected_id) 
             int_selected_id_minus_1 = int_selected_id - 1 # -1 because index starts at 0
                     
             if products[int_selected_id_minus_1].get("price_per") == "Y":
@@ -107,46 +116,40 @@ if __name__ == "__main__":
     #Print out Receipt/Write File
     with open(file_path, "w") as file:
 
-        print(divider)
-        print("GREEN FOODS GROCERY")
-        print("(123)-555-1234")
-        print("WWW.GREEN-FOODS-GROCERY.COM")
+        receipt += divider
+        receipt += "\nGREEN FOODS GROCERY\n"
+        receipt += "(123)-555-1234\n"
+        receipt +="WWW.GREEN-FOODS-GROCERY.COM\n"
 
 
-        print(divider)
-        print("CHECKOUT AT: " + readable_timestamp())
-        print(divider)
+        receipt += divider
+        receipt += "\nCHECKOUT AT: " + readable_timestamp() + "\n"
+        receipt += divider
 
-        file.write(divider)
-        file.write("\nGREEN FOODS GROCERY\n")
-        file.write("(123)-555-1234\n")
-        file.write("WWW.GREEN-FOODS-GROCERY.COM\n")
-
-        file.write(divider)
-        file.write("\nCHECKOUT AT: " + readable_timestamp() + "\n") 
-        file.write(divider)
-
+     
         #Print Individual Items and Prices
-        print("SELECTED PRODUCT: ")
-        file.write("\nSELECTED PRODUCT:")
+       
+        receipt += "\nSELECTED PRODUCT:"
         
         
         
         for selected_id in selected_ids:
                 
             matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
-            
             matching_product = matching_products[0]
 
+           
             #Price per item IDs
             if matching_product["price_per"] == "N":
+                
+                name = find_id_name(matching_product)
                 total_price = total_price + matching_product["price"]
             
             
                 price_usd = "(" + to_usd(matching_product["price"]) + ")"
                     
-                print("... " + matching_product["name"] + " " + price_usd)
-                file.write("\n... " + matching_product["name"] + " " + price_usd)
+               
+                receipt += "\n... " + name + " " + price_usd
 
 
             #Price by pound IDs 
@@ -157,20 +160,23 @@ if __name__ == "__main__":
 
                 price_usd = to_usd(new_pound_price)
         
-                print("... " + matching_product["name"] + " " + price_usd)
-                file.write("\n... " + matching_product["name"] + " " + price_usd)
-                x = x + 1
+              
+                receipt += "\n... " + name + " " + price_usd
+                x = x + 1 
+            
+          
+
 
 
         
-        file.write("\n")
-        file.write(divider)
+        receipt += "\n"
+        receipt += divider
 
         #Calculate subtotal
         total_usd = to_usd(total_price)
-        print(divider)
-        print("SUBTOTAL: " + total_usd)
-        file.write("\nSUBTOTAL: " + total_usd)
+        
+     
+        receipt += "\nSUBTOTAL: " + total_usd
 
         #Calculate tax
         load_dotenv()
@@ -178,23 +184,24 @@ if __name__ == "__main__":
         float_env_tax = float(env_tax)
         tax_amnt = total_price * float_env_tax
         tax_usd = to_usd(tax_amnt)
-        print("TAX: " + tax_usd)
-        file.write("\nTAX: " + tax_usd)
+      
+        receipt += "\nTAX: " + tax_usd
 
 
         #Calculate total
         tax_plus_total = tax_amnt + total_price
         tax_plus_total_usd = to_usd(tax_plus_total)
-        print("TOTAL: " + tax_plus_total_usd)
-        file.write("\nTOTAL: " + tax_plus_total_usd)
+    
+        receipt += "\nTOTAL: " + tax_plus_total_usd
     
 
-        print(divider)
-        print("THANK YOU! SEE YOU AGAIN SOON!")
-        print(divider)
+        goodbye =  print_message("THANK YOU! SEE YOU AGAIN SOON!")
+        receipt += goodbye
         
-        file.write("\n")
-        file.write(divider)
-        file.write("\nTHANK YOU! SEE YOU AGAIN SOON!\n")
-        file.write(divider)
+        receipt += "\n"
+        receipt +=divider
+        receipt += "THANK YOU! SEE YOU AGAIN SOON!"
+        receipt +=divider
+
+        file.write(receipt)
 
