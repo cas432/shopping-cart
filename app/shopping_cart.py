@@ -1,7 +1,7 @@
 
 import pytest
 import os
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 from datetime import datetime
  
 products = [
@@ -131,19 +131,12 @@ if __name__ == "__main__":
         receipt += "\nGREEN FOODS GROCERY\n"
         receipt += "(123)-555-1234\n"
         receipt +="WWW.GREEN-FOODS-GROCERY.COM\n"
-
-
         receipt += divider
         receipt += "\nCHECKOUT AT: " + readable_timestamp() + "\n"
         receipt += divider
-
-     
-        #Print Individual Items and Prices
-       
         receipt += "\nSELECTED PRODUCT:"
         
-        
-        
+                
         for selected_id in selected_ids:
                 
             matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
