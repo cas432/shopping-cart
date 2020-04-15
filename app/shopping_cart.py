@@ -49,7 +49,6 @@ def find_product():
     int_selected_id = int(selected_id) 
     return int
 
-
 def print_message(message):
     '''Formatting for header/footer'''
     print(divider)
