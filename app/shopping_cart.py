@@ -1,9 +1,8 @@
 
 import pytest
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 from datetime import datetime
-
  
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50, "price_per": "N"},
@@ -31,7 +30,7 @@ products = [
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
 
-
+#FUNCTIONS 
 def to_usd(my_price):
     '''Convert numeric value into currency formatting'''
     return f"${my_price:,.2f}"
@@ -50,21 +49,30 @@ def find_product():
     int_selected_id = int(selected_id) 
     return int
 
-def find_id_name(my_id):
-    return my_id["name"]
 
 def print_message(message):
+    '''Formatting for header/footer'''
     print(divider)
     print(message)
     print(divider)
     
+def calc_tax(total):
+    load_dotenv()
+    env_tax = os.environ.get("TAX_RATE")
+    float_env_tax = float(env_tax)
+    tax_amnt = total * float_env_tax
+    return tax_amnt
+
+def calc_total(tax, total):
+        tax_plus_total = tax + total
+        return tax_plus_total
+       
 
 
 if __name__ == "__main__":
     #PART I: CAPTURE USER INPUT
 
     #Initialize Variables/Lists
-
     selected_ids = []
     all_ids = []
     lbs = []
@@ -72,6 +80,7 @@ if __name__ == "__main__":
     x = 0 #lbs index number 
     divider = "-------------------------"
     receipt = ""
+
 
     print_message("WELCOME!")
 
@@ -138,18 +147,19 @@ if __name__ == "__main__":
             matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
             matching_product = matching_products[0]
 
+
            
             #Price per item IDs
             if matching_product["price_per"] == "N":
                 
-                name = find_id_name(matching_product)
+         
                 total_price = total_price + matching_product["price"]
             
             
                 price_usd = "(" + to_usd(matching_product["price"]) + ")"
                     
                
-                receipt += "\n... " + name + " " + price_usd
+                receipt += "\n... " + matching_product["name"] + " " + price_usd
 
 
             #Price by pound IDs 
@@ -166,8 +176,6 @@ if __name__ == "__main__":
             
           
 
-
-
         
         receipt += "\n"
         receipt += divider
@@ -179,18 +187,14 @@ if __name__ == "__main__":
         receipt += "\nSUBTOTAL: " + total_usd
 
         #Calculate tax
-        load_dotenv()
-        env_tax = os.environ.get("TAX_RATE")
-        float_env_tax = float(env_tax)
-        tax_amnt = total_price * float_env_tax
-        tax_usd = to_usd(tax_amnt)
-      
-        receipt += "\nTAX: " + tax_usd
+        tax_number = calc_tax(total_price)
+        receipt += "\nTAX: " + to_usd(tax_number)
 
 
         #Calculate total
-        tax_plus_total = tax_amnt + total_price
+        tax_plus_total = calc_total(tax_number,total_price)
         tax_plus_total_usd = to_usd(tax_plus_total)
+      
     
         receipt += "\nTOTAL: " + tax_plus_total_usd
     
