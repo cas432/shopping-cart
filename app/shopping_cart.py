@@ -37,7 +37,7 @@ def to_usd(my_price):
 
 def filename_timestamp():
     '''Convert timestamp into format for file name'''
-    return datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f")
+    return datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
 
 def readable_timestamp():
     '''Convert timestamp info into readable form for user receipt'''
@@ -95,8 +95,7 @@ if __name__ == "__main__":
     while True: 
         selected_id = input("Please input a product ID (Typye 'DONE' when finished): ")
                     
-    
-        if selected_id in all_ids:
+            if selected_id in all_ids:
             selected_ids.append(selected_id)
             int_selected_id = int(selected_id) 
             int_selected_id_minus_1 = int_selected_id - 1 # -1 because index starts at 0
@@ -105,25 +104,19 @@ if __name__ == "__main__":
                 pounds = input("    How many pounds would you would like to purchase?: ")
                 float_pounds = float(pounds)
                 lbs.append(float_pounds)
-            
-                
+                            
         elif selected_id == "DONE":
             break
-
         else:
             print("\n    ID not found. Please enter a valid ID or type 'DONE' to finish shopping.\n")
             
 
     # PART II: DISPLAY OUTPUT
-
-   
+ 
 
     #file_path = os.path.join(os.path.dirname(__file__), "receipts", today_file_name + ".txt")
     file_path = "receipts/" + filename_timestamp() + ".txt"
-
-    
-
-
+  
     #Print out Receipt/Write File
     with open(file_path, "w") as file:
 
@@ -135,6 +128,8 @@ if __name__ == "__main__":
         receipt += "\nCHECKOUT AT: " + readable_timestamp() + "\n"
         receipt += divider
         receipt += "\nSELECTED PRODUCT:"
+        receipt += "\n"
+        receipt += divider
         
                 
         for selected_id in selected_ids:
@@ -142,60 +137,38 @@ if __name__ == "__main__":
             matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
             matching_product = matching_products[0]
 
-
-           
             #Price per item IDs
             if matching_product["price_per"] == "N":
-                
-         
-                total_price = total_price + matching_product["price"]
-            
-            
-                price_usd = "(" + to_usd(matching_product["price"]) + ")"
-                    
-               
+                   total_price = total_price + matching_product["price"]
+                       
+                price_usd = "(" + to_usd(matching_product["price"]) + ")" 
                 receipt += "\n... " + matching_product["name"] + " " + price_usd
 
-
             #Price by pound IDs 
-            elif matching_product["price_per"] == "Y":
-            
+            elif matching_product["price_per"] == "Y":            
                 new_pound_price = matching_product["price"] * lbs[x]
                 total_price = total_price + new_pound_price
-
-                price_usd = to_usd(new_pound_price)
-        
-              
+                price_usd = to_usd(new_pound_price)                     
                 receipt += "\n... " + name + " " + price_usd
                 x = x + 1 
             
           
-
-        
-        receipt += "\n"
-        receipt += divider
-
         #Calculate subtotal
         total_usd = to_usd(total_price)
-        
-     
+             
         receipt += "\nSUBTOTAL: " + total_usd
 
         #Calculate tax
         tax_number = calc_tax(total_price)
         receipt += "\nTAX: " + to_usd(tax_number)
 
-
         #Calculate total
         tax_plus_total = calc_total(tax_number,total_price)
-        tax_plus_total_usd = to_usd(tax_plus_total)
-      
-    
-        receipt += "\nTOTAL: " + tax_plus_total_usd
-    
+        tax_plus_total_usd = to_usd(tax_plus_total)     
+  
+        receipt += "\nTOTAL: " + tax_plus_total_usd    
 
-        print_message("THANK YOU! SEE YOU AGAIN SOON!")
- 
+        print_message("THANK YOU! SEE YOU AGAIN SOON!") 
         
         receipt += "\n"
         receipt +=divider
