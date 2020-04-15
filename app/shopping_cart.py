@@ -57,13 +57,15 @@ def print_message(message):
     print(divider)
     
 def calc_tax(total):
-    load_dotenv()
-    env_tax = os.environ.get("TAX_RATE")
-    float_env_tax = float(env_tax)
+    '''Calculate order tax'''
+    #load_dotenv()
+    #env_tax = os.environ.get("TAX_RATE")
+    float_env_tax = 0.0875
     tax_amnt = total * float_env_tax
     return tax_amnt
 
 def calc_total(tax, total):
+        '''Calculate order total'''
         tax_plus_total = tax + total
         return tax_plus_total
        
