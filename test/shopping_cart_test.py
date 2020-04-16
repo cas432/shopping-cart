@@ -55,3 +55,4 @@ def test_find_product():
     # if there is no match, it should raise an IndexError
     with pytest.raises(IndexError):
         find_product("2222", products)
+
