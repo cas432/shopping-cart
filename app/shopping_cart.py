@@ -114,8 +114,7 @@ if __name__ == "__main__":
 
     # PART II: DISPLAY OUTPUT
  
-
-    #file_path = os.path.join(os.path.dirname(__file__), "receipts", today_file_name + ".txt")
+     #file_path = os.path.join(os.path.dirname(__file__), "receipts", today_file_name + ".txt")
     file_path = "receipts/" + filename_timestamp() + ".txt"
   
     #Print out Receipt/Write File
