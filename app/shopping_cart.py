@@ -29,7 +29,6 @@ products = [
     {"id":22, "name": "Organic Apples", "department": "fruit", "aisle": "produce", "price": 1.20, "price_per": "Y"}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
-
 #FUNCTIONS 
 def to_usd(my_price):
     '''Convert numeric value into currency formatting'''
@@ -69,7 +68,6 @@ def find_product(product_id, all_products):
     matching_product = matching_products[0]
     return matching_product
 
-
 if __name__ == "__main__":
     #PART I: CAPTURE USER INPUT
 
@@ -81,7 +79,6 @@ if __name__ == "__main__":
     x = 0 #lbs index number 
     divider = "-------------------------"
     receipt = ""
-
 
     print_message("WELCOME!")
 
