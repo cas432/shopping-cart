@@ -56,6 +56,3 @@ def test_find_product():
     with pytest.raises(IndexError):
         find_product("2222", products)
 
-           
-
-
