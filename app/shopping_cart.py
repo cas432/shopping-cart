@@ -43,12 +43,6 @@ def readable_timestamp():
     '''Convert timestamp info into readable form for user receipt'''
     return datetime.now().strftime("%Y-%m-%d %I:%M %p")
 
-def find_product():
-    '''Find the proper product'''
-    selected_ids.append(selected_id)
-    int_selected_id = int(selected_id) 
-    return int
-
 def print_message(message):
     '''Formatting for header/footer'''
     print(divider)
@@ -73,7 +67,6 @@ def find_product(product_id, all_products):
     '''looks up a product given its unique identified from a list of products'''
     matching_products = [p for p in all_products if str(p["id"]) == str(product_id)]
     matching_product = matching_products[0]
-
     return matching_product
 
 
